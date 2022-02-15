@@ -1,6 +1,6 @@
-# SiriDB ThingsDB Module (Go)
+# FireBase ThingsDB Module (Go)
 
-SiriDB module written using the [Go language](https://golang.org).
+FireBase module written using the [Go language](https://golang.org).
 
 
 ## Installation
