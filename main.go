@@ -41,7 +41,7 @@ type serverSiriDB struct {
 }
 
 type authFirebase struct {
-	jsonData string `msgpack:"jsonData"`
+	Creds string `msgpack:"creds"`
 }
 
 type reqValidateToken struct {
@@ -56,16 +56,16 @@ func setupFirebase(authFB *authFirebase) {
 		client = nil
 	}
 
-	opt := option.WithCredentialsJSON([]byte(authFB.jsonData)) //Firebase admin SDK initialization
+	opt := option.WithCredentialsJSON([]byte(authFB.Creds)) //Firebase admin SDK initialization
 	app, err := firebase.NewApp(context.Background(), nil, opt)
 	if err != nil {
-		log.Printf("trying with json: %s", authFB.jsonData)
+		log.Printf("trying with json: %s", authFB.Creds)
 		log.Printf("Got error while creating app: %s", err)
 		panic("Firebase load error, could not create app")
 	} //Firebase Auth
 	client, err = app.Auth(context.Background())
 	if err != nil {
-		log.Printf("trying with json: %s", authFB.jsonData)
+		log.Printf("trying with json: %s", authFB.Creds)
 		log.Printf("Got error while creating client: %s", err)
 		panic("Firebase load error, could not create client!")
 	}
@@ -127,6 +127,7 @@ func handler(buf *timod.Buffer, quit chan bool) {
 			case timod.ProtoModuleConf:
 				var auth authFirebase
 				err := msgpack.Unmarshal(pkg.Data, &auth)
+				log.Printf("received json: %s", auth.Creds)
 				if err == nil {
 					setupFirebase(&auth)
 				} else {
