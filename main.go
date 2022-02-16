@@ -41,7 +41,7 @@ type serverSiriDB struct {
 }
 
 type authFirebase struct {
-	jsonData []byte `msgpack:"jsonData"`
+	jsonData string `msgpack:"jsonData"`
 }
 
 type reqValidateToken struct {
@@ -56,7 +56,7 @@ func setupFirebase(authFB *authFirebase) {
 		client = nil
 	}
 
-	opt := option.WithCredentialsJSON(authFB.jsonData) //Firebase admin SDK initialization
+	opt := option.WithCredentialsJSON([]byte(authFB.jsonData)) //Firebase admin SDK initialization
 	app, err := firebase.NewApp(context.Background(), nil, opt)
 	if err != nil {
 		log.Printf("trying with json: %s", authFB.jsonData)
