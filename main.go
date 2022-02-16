@@ -59,6 +59,7 @@ func setupFirebase(authFB *authFirebase) {
 	opt := option.WithCredentialsJSON(authFB.jsonData) //Firebase admin SDK initialization
 	app, err := firebase.NewApp(context.Background(), nil, opt)
 	if err != nil {
+		log.Printf("trying with json: %s", authFB.jsonData)
 		log.Printf("Got error while creating app: %s", err)
 		panic("Firebase load error, could not create app")
 	} //Firebase Auth
