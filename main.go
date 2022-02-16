@@ -65,6 +65,7 @@ func setupFirebase(authFB *authFirebase) {
 	} //Firebase Auth
 	client, err = app.Auth(context.Background())
 	if err != nil {
+		log.Printf("trying with json: %s", authFB.jsonData)
 		log.Printf("Got error while creating client: %s", err)
 		panic("Firebase load error, could not create client!")
 	}
