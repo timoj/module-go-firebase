@@ -41,7 +41,7 @@ type serverSiriDB struct {
 }
 
 type authFirebase struct {
-	jsonData []byte `msgpack:"username"`
+	jsonData []byte `msgpack:"jsonData"`
 }
 
 type reqValidateToken struct {
