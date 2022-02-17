@@ -62,13 +62,17 @@ func setupFirebase(authFB *authFirebase) {
 		log.Printf("trying with json: %s", authFB.Creds)
 		log.Printf("Got error while creating app: %s", err)
 		panic("Firebase load error, could not create app")
+		return
 	} //Firebase Auth
 	client, err = app.Auth(context.Background())
 	if err != nil {
 		log.Printf("trying with json: %s", authFB.Creds)
 		log.Printf("Got error while creating client: %s", err)
 		panic("Firebase load error, could not create client!")
+		return
 	}
+
+	timod.WriteConfOk()
 }
 
 func handleValidateToken(pkg *timod.Pkg, req *reqValidateToken) {
