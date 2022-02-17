@@ -45,7 +45,7 @@ type authFirebase struct {
 }
 
 type reqValidateToken struct {
-	Token string `msgpack:"query"`
+	Token string `msgpack:"token"`
 }
 
 func setupFirebase(authFB *authFirebase) {
